@@ -24,7 +24,6 @@ import "@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol";
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
-
 interface IAbstractRewards {
 	/**
 	 * @dev Returns the total amount of rewards a given address is able to withdraw.
@@ -62,6 +61,14 @@ interface IAbstractRewards {
 	 * @param fundsWithdrawn the amount of funds that were withdrawn
 	 */
 	event RewardsWithdrawn(address indexed by, uint256 fundsWithdrawn);
+}
+
+interface ITimeLockPool {
+    function deposit(uint256 _amount, uint256 _duration, address _receiver) external;
+}
+
+interface IBasePool {
+    function distributeRewards(uint256 _amount) external;
 }
 
 abstract contract AbstractRewards is IAbstractRewards {
@@ -193,10 +200,6 @@ contract TokenSaver is AccessControlEnumerable {
 
 }
 
-interface IBasePool {
-    function distributeRewards(uint256 _amount) external;
-}
-
 abstract contract BasePool is ERC20Votes, AbstractRewards, IBasePool, TokenSaver {
     using SafeERC20 for IERC20;
     using SafeCast for uint256;
@@ -270,10 +273,6 @@ abstract contract BasePool is ERC20Votes, AbstractRewards, IBasePool, TokenSaver
         emit RewardsClaimed(_msgSender(), _receiver, escrowedRewardAmount, nonEscrowedRewardAmount);
     }
 
-}
-
-interface ITimeLockPool {
-    function deposit(uint256 _amount, uint256 _duration, address _receiver) external;
 }
 
 contract TimeLockPool is BasePool, ITimeLockPool {
