@@ -20,4 +20,8 @@ import "@openzeppelin/contracts/access/IAccessControlEnumerable.sol";
 import "@openzeppelin/contracts/access/AccessControlEnumerable.sol";
 import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 import "@openzeppelin/contracts/utils/introspection/IERC165.sol";
+import "@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol";
+import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
+import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+
 
