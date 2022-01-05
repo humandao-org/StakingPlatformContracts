@@ -14,3 +14,4 @@ A repository to store staking contracts for the HDAO token
 
 ## Useful commands
 * `yarn hardhat`: Starts a local hardhat blockchain at `http://localhost:8545/`
+* `npx hardhat deploy`: Deploys a test version of the timelock contract to the local blockchain
